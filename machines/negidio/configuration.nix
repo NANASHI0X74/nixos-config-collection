@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./components/ssh-decrypt.nix
+      ./components/openssh-config.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -57,7 +58,7 @@
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
-    neovim git
+    neovim git tmux pciutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -68,11 +69,6 @@
   #   enableSSHSupport = true;
   #   pinentryFlavor = "gnome3";
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
