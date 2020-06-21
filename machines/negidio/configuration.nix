@@ -7,10 +7,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./components/defaults-servers.nix
-      ./components/ssh-decrypt.nix
-      ./components/openssh-config.nix
+      ../../hardware-configuration.nix
+      ../../components/defaults-servers.nix
+      ../../components/ssh-decrypt.nix
+      ../../components/openssh-config.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -22,7 +22,7 @@
         device = "/dev/disk/by-uuid/ceb75a70-c7d8-44a5-b91f-9cdd75d415e7";
         preLVM = true;
         allowDiscards = true;
-      };  
+      };
       "satacrypt" = {
         device = "/dev/disk/by-uuid/d089dd88-be21-45ea-a1e9-21958368359a";
         preLVM = true;
@@ -37,23 +37,16 @@
   networking.hostName = "negidio"; # Define your hostname.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp3s0.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;
   networking.wireless.enable = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -62,39 +55,9 @@
     neovim git tmux pciutils
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gnome3";
-  # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 7474 7475 8448 ];
   # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
