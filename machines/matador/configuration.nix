@@ -2,10 +2,10 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./components/defaults-servers.nix
-      ./components/ssh-decrypt.nix
-      ./components/openssh-config.nix
+      ../../hardware-configuration.nix
+      ../../components/defaults-servers.nix
+      ../../components/ssh-decrypt.nix
+      ../../components/openssh-config.nix
     ];
 
   boot.loader.grub.enable = true;
