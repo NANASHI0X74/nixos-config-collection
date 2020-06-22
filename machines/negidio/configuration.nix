@@ -7,6 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ../../components/matrix-server.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
@@ -56,7 +57,12 @@
   ];
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 7474 7475 8448 ];
+  networking.firewall.allowedTCPPorts = [
+    7474 7475 # ssh
+    8448 # matrix federation
+    80 # http
+    443 # https
+  ];
   # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
