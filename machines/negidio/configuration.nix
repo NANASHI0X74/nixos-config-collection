@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../components/wireguard/wg-client.nix
+       ../../components/wireguard/wg-client.nix
       ../../components/matrix/matrix-server.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
@@ -61,6 +61,7 @@
   networking.firewall.allowedTCPPorts = [
     7474 7475 # ssh
     8448 # matrix federation
+    8008 # matrix client?
     80 # http
     443 # https
   ];

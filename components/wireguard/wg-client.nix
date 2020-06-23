@@ -1,12 +1,14 @@
 # from https://nixos.wiki/wiki/Wireguard
 {config, pkgs, ...}:
 {
+  networking.firewall.allowedUDPPorts = [ 58531 ];
   # Enable Wireguard
   networking.wireguard.interfaces = {
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
       ips = [ "10.100.0.2/24" ];
+      listenPort = 58531;
 
       # Path to the private key file.
       #
@@ -27,7 +29,7 @@
           #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
 
           # Set this to the server IP and port.
-          endpoint = "nanashi0x74.dev:51820";
+          endpoint = "51.15.10.88:51820";
 
           # Send keepalives every 25 seconds. Important to keep NAT tables alive.
           persistentKeepalive = 25;

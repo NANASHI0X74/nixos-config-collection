@@ -89,20 +89,19 @@
     };
   };
 
-# share certs with matrix-synapse and restart on renewal
   security.acme.certs = {
     "nanashi0x74.dev" = {
       group = "matrix-synapse";
       allowKeysForGroup = true;
       postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
       email = "rian.lindenberger@gmail.com";
-     };
+    };
     "matrix.nanashi0x74.dev" = {
       group = "matrix-synapse";
       allowKeysForGroup = true;
       postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
       email = "rian.lindenberger@gmail.com";
-     };
-   };
+    };
+  };
   security.acme.acceptTerms = true;
 }
