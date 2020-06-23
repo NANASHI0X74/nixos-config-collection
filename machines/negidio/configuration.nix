@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../components/matrix-server.nix
+      ../../components/matrix/matrix-server.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
