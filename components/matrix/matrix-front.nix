@@ -1,6 +1,6 @@
 {config, pkgs, ...}:
 {
-  nginx = {
+  services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
@@ -45,5 +45,4 @@
       email = "rian.lindenberger@gmail.com";
     };
   };
-  security.acme.acceptTerms = true;
-};
+}
