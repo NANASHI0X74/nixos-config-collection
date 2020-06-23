@@ -11,9 +11,7 @@
         locations = {
           "= /.well-known/matrix/server".extraConfig =
             let
-              # use 443 instead of the default 8448 port to unite
-              # the client-server and server-server port for simplicity
-              server = { "m.server" = "matrix.nanashi0x74.dev:443"; };
+              server = { "m.server" = "matrix.nanashi0x74.dev:8448"; };
             in ''
               add_header Content-Type application/json;
               return 200 '${builtins.toJSON server}';
@@ -37,6 +35,7 @@
       };
     };
   };
+  networking.firewall.allowedTCPPorts: [ 8448, 443, 80];
   security.acme.certs = {
     "nanashi0x74.dev" = {
       group = "matrix-synapse";
