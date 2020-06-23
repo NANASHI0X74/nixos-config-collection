@@ -35,11 +35,11 @@
       };
     };
   };
-  networking.firewall.allowedTCPPorts: [ 8448, 443, 80];
+  networking.firewall.allowedTCPPorts = [ 8448 443 80];
   security.acme.certs = {
     "nanashi0x74.dev" = {
       allowKeysForGroup = true;
-      postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
+      postRun = "systemctl reload nginx.service";
       email = "rian.lindenberger@gmail.com";
     };
   };
