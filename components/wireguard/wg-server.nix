@@ -9,22 +9,22 @@
       internalInterfaces = [ "wg0" ];
       forwardPorts = [
         {
-          destination = "192.168.178.42:80";
+          destination = "10.100.0.2:80";
           proto = "tcp";
           sourcePort = "80";
         }
         {
-          destination = "192.168.178.42:443";
+          destination = "10.100.0.2:443";
           proto = "tcp";
           sourcePort = "443";
         }
         {
-          destination = "192.168.178.42:8008";
+          destination = "10.100.0.2:8008";
           proto = "tcp";
           sourcePort = "8008";
         }
         {
-          destination = "192.168.178.42:8448";
+          destination = "10.100.0.2:8448";
           proto = "tcp";
           sourcePort = "8448";
         }
@@ -39,7 +39,7 @@
         # "wg0" is the network interface name. You can name the interface arbitrarily.
         wg0 = {
           # Determines the IP address and subnet of the server's end of the tunnel interface.
-          ips = [ "192.168.178.230/24" ];
+          ips = [ "10.100.0.1/24" ];
 
           # The port that Wireguard listens to. Must be accessible by the client.
           listenPort = 51820;
@@ -68,7 +68,7 @@
               # Public key of the peer (not a file path).
               publicKey = "d81iwtv/dubG3LzQHOAi/U4uqACISnlVj9fI9tcVunQ=";
               # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
-              allowedIPs = [ "192.168.178.42/32" ];
+              allowedIPs = [ "10.100.0.2/32" ];
             }
           ];
         };

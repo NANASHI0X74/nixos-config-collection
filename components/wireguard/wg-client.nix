@@ -6,7 +6,7 @@
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
-      ips = [ "192.168.178.42/24" ];
+      ips = [ "10.100.0.2/24" ];
 
       # Path to the private key file.
       #
