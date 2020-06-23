@@ -1,6 +1,6 @@
 {config, pkgs, ...}:
 {
-  nginx = {
+  services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
@@ -38,11 +38,9 @@
   networking.firewall.allowedTCPPorts: [ 8448, 443, 80];
   security.acme.certs = {
     "nanashi0x74.dev" = {
-      group = "matrix-synapse";
       allowKeysForGroup = true;
       postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
       email = "rian.lindenberger@gmail.com";
     };
   };
-  security.acme.acceptTerms = true;
-};
+}
