@@ -19,11 +19,6 @@
           sourcePort = "443";
         }
         {
-          destination = "10.100.0.2:8008";
-          proto = "tcp";
-          sourcePort = "8008";
-        }
-        {
           destination = "10.100.0.2:8448";
           proto = "tcp";
           sourcePort = "8448";
@@ -32,7 +27,7 @@
     };
       firewall = {
         allowedUDPPorts = [ 51820 ];
-        allowedTCPPorts = [ 8448, 8008, 443, 80];
+        allowedTCPPorts = [ 8448 443 80];
       };
 
       wireguard.interfaces = {
