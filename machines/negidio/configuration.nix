@@ -7,6 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ../../components/wireguard/wg-client.nix
       ../../components/matrix/matrix-server.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
@@ -28,7 +29,7 @@
         device = "/dev/disk/by-uuid/d089dd88-be21-45ea-a1e9-21958368359a";
         preLVM = true;
         allowDiscards = true;
-      };  
+      };
     };
   };
 
