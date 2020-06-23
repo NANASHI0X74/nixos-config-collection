@@ -3,7 +3,7 @@
 {
   # enable NAT
   networking.nat.enable = true;
-  networking.nat.externalInterface = "enp0s20";
+  networking.nat.externalInterface = "eth0";
   networking.nat.internalInterfaces = [ "wg0" ];
   networking.firewall = {
     allowedUDPPorts = [ 51820 ];
@@ -34,19 +34,15 @@
       # Note: The private key can also be included inline via the privateKey option,
       # but this makes the private key world-readable; thus, using privateKeyFile is
       # recommended.
-      privateKeyFile = "path to private key file";
+      privateKeyFile = "/root/wireguard-keys/private";
 
       peers = [
         # List of allowed peers.
         { # Feel free to give a meaning full name
           # Public key of the peer (not a file path).
-          publicKey = "{client public key}";
+          publicKey = "d81iwtv/dubG3LzQHOAi/U4uqACISnlVj9fI9tcVunQ=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = [ "10.100.0.2/32" ];
-        }
-        { # John Doe
-          publicKey = "{john doe's public key}";
-          allowedIPs = [ "10.100.0.3/32" ];
         }
       ];
     };

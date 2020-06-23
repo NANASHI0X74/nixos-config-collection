@@ -2,10 +2,12 @@
 {
   imports =
     [
+      ../../components/matrix/matrix-front.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
       ../../components/openssh-config.nix
+      ../../components/wireguard/wg-server.nix
     ];
 
   boot.loader.grub.enable = true;
