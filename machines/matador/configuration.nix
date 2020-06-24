@@ -2,7 +2,6 @@
 {
   imports =
     [
-      ../../components/matrix/matrix-front.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
@@ -49,9 +48,6 @@
     enable = true;
     allowedTCPPorts = [
       7474 7475    # SSH
-      8448  # Matrix federation
-      80    # http
-      443   # https
     ];
   };
 

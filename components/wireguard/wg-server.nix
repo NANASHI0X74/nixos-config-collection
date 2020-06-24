@@ -2,6 +2,11 @@
 {config, pkgs, ...}:
 {
   # enable NAT
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = 1;
+    "net.ipv4.conf.default.forwarding" = 1;
+    "net.ipv4.conf.eth0.route_localnet" = 1;
+  };
   networking = {
     nat = {
       enable = true;
@@ -11,17 +16,17 @@
         {
           destination = "10.100.0.2:80";
           proto = "tcp";
-          sourcePort = "80";
+          sourcePort = 80;
         }
         {
           destination = "10.100.0.2:443";
           proto = "tcp";
-          sourcePort = "443";
+          sourcePort = 443;
         }
         {
           destination = "10.100.0.2:8448";
           proto = "tcp";
-          sourcePort = "8448";
+          sourcePort = 8448;
         }
       ];
     };
@@ -69,5 +74,4 @@
         };
     };
   };
-
 }
