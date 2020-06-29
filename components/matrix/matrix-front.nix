@@ -35,12 +35,13 @@
       };
 	    "matrix.nanashi0x74.dev" = {
 	      locations."/" = {
-	        proxyPass = "https://10.100.0.2:443";
+	        proxyPass = "10.100.0.2:443";
 	      };
       };
     };
   };
   security.acme = {
+    acceptTerms = true;
     certs = {
       "nanashi0x74.dev" = {
         postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
