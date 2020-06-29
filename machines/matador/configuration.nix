@@ -3,6 +3,7 @@
   imports =
     [
       ../../hardware-configuration.nix
+      ../../components/matrix/matrix-front.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
       ../../components/openssh-config.nix
