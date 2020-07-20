@@ -1,6 +1,7 @@
 # from https://nixos.wiki/wiki/Wireguard
 {config, pkgs, ...}:
 {
+  imports = [ ./restart-after-upgrade.nix ];
   networking.firewall.allowedUDPPorts = [ 58531 ];
   # Enable Wireguard
   networking.wireguard.interfaces = {

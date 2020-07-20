@@ -1,6 +1,7 @@
 # from https://nixos.wiki/wiki/Wireguard
 {config, pkgs, ...}:
 {
+  imports = [ ./restart-after-upgrade.nix ];
   # enable NAT
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.forwarding" = 1;
