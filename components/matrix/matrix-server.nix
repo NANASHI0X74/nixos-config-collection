@@ -126,7 +126,7 @@
         public = {
           enabled = true;
           prefix = "/public";
-          external = "http://matrix.nanashi0x74.dev:8080/public";
+          external = "http://matrix.nanashi0x74.dev/public";
         };
       };
       bridge = {
