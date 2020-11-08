@@ -1,8 +1,5 @@
 {config, pkgs, ... }:
 {
-  imports = [
-    <nixos-unstable/nixos/modules/services/misc/mautrix-telegram.nix>
-  ];
   services = {
     postgresql = {
       enable = true;
@@ -11,9 +8,9 @@
       enable = true;
       server_name = "nanashi0x74.dev";
       # public_baseurl = "https://matrix.nanashi0x74.tech";
-      tls_certificate_path = "/var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem";
-      tls_private_key_path = "/var/lib/acme/matrix.nanashi0x74.dev/key.pem";
-      registration_shared_secret = "notasecret"; 
+      tls_certificate_path = "/etc/matrix-synapse/certs/fullchain.pem";
+      tls_private_key_path = "/etc/matrix-synapse/certs/key.pem";
+      registration_shared_secret = "notasecret";
       database_type = "psycopg2";
       database_args = {
         database = "matrix-synapse";
@@ -97,15 +94,16 @@
 
   security.acme.certs = {
     "nanashi0x74.dev" = {
-      group = "matrix-synapse";
-      allowKeysForGroup = true;
       postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
       email = "rian.lindenberger@gmail.com";
     };
     "matrix.nanashi0x74.dev" = {
-      group = "matrix-synapse";
-      allowKeysForGroup = true;
-      postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
+      postRun = ''
+                    cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;;
+                    cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;;
+                    systemctl reload nginx.service;
+                    systemctl restart matrix-synapse.service;
+      '';
       email = "rian.lindenberger@gmail.com";
     };
   };
