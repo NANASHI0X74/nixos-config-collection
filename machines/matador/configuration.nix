@@ -16,11 +16,12 @@
   boot = {
     kernelParams = [ "ip=51.15.10.88::51.15.10.1:255.255.255.255:matador" ];
     initrd = {
-      luks.devices = [{
-        name = "cryptroot";
-  	device = "/dev/disk/by-uuid/41dc39e2-5122-4b47-9079-cddcc299af58";
-	preLVM = true;
-      }];
+      luks.devices = {
+        "cryptroot" = {
+  	      device = "/dev/disk/by-uuid/41dc39e2-5122-4b47-9079-cddcc299af58";
+	        preLVM = true;
+        };
+      };
     };
   };
 
@@ -32,10 +33,10 @@
   networking.nameservers = [ "62.210.16.6" "62.210.16.7" "1.1.1.1" ];
   networking.hostName = "matador";
 
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
 
   time.timeZone = "Europe/Amsterdam";
