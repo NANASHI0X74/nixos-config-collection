@@ -37,7 +37,7 @@
     };
     extraConfig = {
       gitlab_shell = {
-        ssh_port = 7475;
+        ssh_port = 7476;
       };
     };
     # extraConfig = {
