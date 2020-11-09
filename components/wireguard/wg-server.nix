@@ -25,6 +25,11 @@
           sourcePort = 443;
         }
         {
+          destination = "10.100.0.2:7475";
+          proto = "tcp";
+          sourcePort = 7476;
+        }
+        {
           destination = "10.100.0.2:8448";
           proto = "tcp";
           sourcePort = 8448;

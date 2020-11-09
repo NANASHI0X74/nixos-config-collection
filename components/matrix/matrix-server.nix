@@ -99,8 +99,8 @@
     };
     "matrix.nanashi0x74.dev" = {
       postRun = ''
-                    cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;;
-                    cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;;
+                    cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;
+                    cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;
                     systemctl reload nginx.service;
                     systemctl restart matrix-synapse.service;
       '';

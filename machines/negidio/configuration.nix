@@ -7,12 +7,13 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-       ../../components/wireguard/wg-client.nix
+      ../../components/wireguard/wg-client.nix
       ../../components/matrix/matrix-server.nix
       ../../hardware-configuration.nix
       ../../components/defaults-servers.nix
       ../../components/ssh-decrypt.nix
       ../../components/openssh-config.nix
+      ../../components/gitlab.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
