@@ -126,8 +126,6 @@
   hardware = {
     pulseaudio = {
       enable = true;
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
       configFile = ../../non-nix/pulseaudio/default.pa;
     };
     bluetooth.enable = true;
