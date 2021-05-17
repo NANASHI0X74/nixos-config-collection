@@ -17,4 +17,4 @@ let
   myEmacs = pkgs.emacs;
   emacsWithPackages = (pkgs.emacsPackagesGen myEmacs).emacsWithPackages;
 in emacsWithPackages
-(epkgs: (with epkgs.melpaPackages; [ emacsql emacsql-sqlite emacs-libvterm ]))
+(epkgs: (with epkgs.melpaPackages; [ emacsql emacsql-sqlite vterm ]))

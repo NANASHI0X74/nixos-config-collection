@@ -1,9 +1,3 @@
-# nix run nixpkgs.nixFlakes -c sudo nix --experimental-features 'flakes nix-command' build .#nixosConfigurations.$(hostname).config.system.build.toplevel
-# sudo ./result/bin/switch-to-configuration switch
-
-# Now nixos-rebuild can use flakes:
-# sudo nixos-rebuild switch --flake /etc/nixos
-
 # To update flake.lock run:
 # sudo nix flake update --recreate-lock-file --commit-lock-file /etc/nixos
 
@@ -24,14 +18,16 @@
         inputs.home-manager.nixosModules.home-manager
 
         ({ pkgs, ... }: {
-          nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
-          nix.registry.nixpkgs.flake = inputs.nixpkgs;
-
+          nix = {
+            extraOptions = "experimental-features = nix-command flakes";
+            package = pkgs.nixFlakes;
+            registry.nixpkgs.flake = inputs.nixpkgs;
+            autoOptimiseStore = true;
+          };
           home-manager.useGlobalPkgs = true;
         })
 
-        ./configuration.nix
+        ./machines/quomp/configuration.nix
       ];
     };
 
