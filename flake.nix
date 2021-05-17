@@ -2,10 +2,15 @@
 # sudo nix flake update --recreate-lock-file --commit-lock-file /etc/nixos
 
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  inputs.home-manager.url = "github:nix-community/home-manager/master";
-  inputs.home-manager.inputs.nixpkgs.follows = "/nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    agenix.url = "github:ryantm/agenix";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "/nixpkgs";
+    };
+  };
 
   outputs = inputs: {
 
@@ -15,6 +20,7 @@
       # in the top-level arguments (e.g. `{ pkgs, lib, inputs, ... }:`).
       specialArgs = { inherit inputs; };
       modules = [
+        inputs.agenix.nixosModules.age
         inputs.home-manager.nixosModules.home-manager
 
         ({ pkgs, ... }: {
