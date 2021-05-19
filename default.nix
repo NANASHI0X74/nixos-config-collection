@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
 let
-  inherit (lib) mapAttrs filterAttrs mapAttrsToList mkDefault;
+  inherit (lib) mapAttrs filterAttrs mapAttrsToList mkDefault mkIf;
   inherit (lib.my) mapModulesRec';
 in {
   imports =

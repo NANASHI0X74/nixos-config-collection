@@ -19,7 +19,7 @@
         import pkgs {
           inherit system;
           config.allowUnfree = true; # forgive me Stallman senpai
-          overlays = extraOverlays ++ (lib.attrValues self.overlays);
+          # overlays = extraOverlays ++ (lib.attrValues self.overlays);
         };
       pkgs = mkPkgs nixpkgs [ self.overlay ];
       lib = nixpkgs.lib.extend (self: super: {
