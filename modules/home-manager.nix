@@ -16,9 +16,9 @@
     #   home.file        ->  home-manager.users.hlissner.home.file
     #   home.configFile  ->  home-manager.users.hlissner.home.xdg.configFile
     #   home.dataFile    ->  home-manager.users.hlissner.home.xdg.dataFile
-    users.${config.user.name} = {
-      home = let inherit (lib) mkAliasDefinitions;
-      in {
+    users.${config.user.name} = let inherit (lib) mkAliasDefinitions;
+    in {
+      home = {
         file = mkAliasDefinitions options.home.file;
         # Necessary for home-manager to work with flakes, otherwise it will
         # look for a nixpkgs channel.
