@@ -1,7 +1,5 @@
 { inputs, config, lib, pkgs, ... }:
-let
-  inherit (lib) mapAttrs filterAttrs mapAttrsToList mkDefault mkIf;
-  inherit (lib.my) mapModulesRec';
+let inherit (lib) mapAttrs filterAttrs mapAttrsToList mkDefault mkIf;
 in {
   imports =
     # I use home-manager to deploy files to $HOME; little else
@@ -9,7 +7,7 @@ in {
       inputs.home-manager.nixosModules.home-manager
     ]
     # All my personal modules
-    ++ (mapModulesRec' (toString ./modules) import);
+    ++ (lib.my.mapModulesRec' (toString ./modules) import);
 
   # Common config for all nixos machines; and to ensure the flake operates
   # soundly
