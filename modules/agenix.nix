@@ -6,7 +6,7 @@ let
   inherit (builtins) pathExists filter;
   inherit (lib) mapAttrs' nameValuePair removeSuffix mkDefault;
   inherit (inputs) agenix;
-  secretsDir = "${toString ../hosts}/${config.networking.hostName}/secrets";
+  secretsDir = "${toString ../machines}/${config.networking.hostName}/secrets";
   secretsFile = "${secretsDir}/secrets.nix";
 in {
   imports = [ agenix.nixosModules.age ];
