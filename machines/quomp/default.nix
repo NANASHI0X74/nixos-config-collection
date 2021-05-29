@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -46,10 +46,10 @@
   };
   time.timeZone = "Europe/Berlin";
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "slack" "hplip" ];
   environment.systemPackages = with pkgs; [
     nodePackages.pyright
-    nixfmt
     direnv
     wmctrl
     spectacle
@@ -57,13 +57,11 @@
     ripgrep
     coreutils
     fd
-    clang
     slack
     tmux
     nodejs-14_x
     docker
     docker-compose
-    arandr
     wget
     neovim
     git
@@ -72,7 +70,7 @@
     brave
     xclip
     virt-manager
-    (import ../../components/emacs.nix { inherit pkgs; })
+    (import ../../profiles/emacs.nix { inherit pkgs; })
     python3
     pciutils
     usbutils

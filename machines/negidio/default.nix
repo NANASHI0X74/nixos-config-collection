@@ -5,16 +5,16 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../../components/wireguard/wg-client.nix
-      ../../components/matrix/matrix-server.nix
-      ../../hardware-configuration.nix
-      ../../components/defaults-servers.nix
-      ../../components/ssh-decrypt.nix
-      ../../components/openssh-config.nix
-      ../../components/gitlab.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+
+    ../../profiles/wireguard/wg-client.nix
+    ../../profiles/matrix/matrix-server.nix
+    ../../profiles/defaults-servers.nix
+    ../../profiles/ssh-decrypt.nix
+    ../../profiles/openssh-config.nix
+    ../../profiles/gitlab.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -54,13 +54,12 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  environment.systemPackages = with pkgs; [
-    neovim git tmux pciutils
-  ];
+  environment.systemPackages = with pkgs; [ neovim git tmux pciutils ];
 
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [
-    7474 7475 # ssh
+    7474
+    7475 # ssh
     8448 # matrix federation
     8008 # matrix client?
     80 # http

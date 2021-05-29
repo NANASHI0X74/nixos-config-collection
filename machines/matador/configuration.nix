@@ -1,13 +1,11 @@
-{ config, pkgs, ... }:
-{
-  imports =
-    [
-      ../../hardware-configuration.nix
-      ../../components/defaults-servers.nix
-      ../../components/ssh-decrypt.nix
-      ../../components/openssh-config.nix
-      ../../components/wireguard/wg-server.nix
-    ];
+{ config, pkgs, ... }: {
+  imports = [
+    ../../hardware-configuration.nix
+    ../../profiles/defaults-servers.nix
+    ../../profiles/ssh-decrypt.nix
+    ../../profiles/openssh-config.nix
+    ../../profiles/wireguard/wg-server.nix
+  ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -18,8 +16,8 @@
     initrd = {
       luks.devices = {
         "cryptroot" = {
-  	      device = "/dev/disk/by-uuid/41dc39e2-5122-4b47-9079-cddcc299af58";
-	        preLVM = true;
+          device = "/dev/disk/by-uuid/41dc39e2-5122-4b47-9079-cddcc299af58";
+          preLVM = true;
         };
       };
     };
@@ -41,14 +39,13 @@
 
   time.timeZone = "Europe/Amsterdam";
 
-  environment.systemPackages = with pkgs; [
-    wget neovim git
-  ];
+  environment.systemPackages = with pkgs; [ wget neovim git ];
 
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      7474 7475    # SSH
+      7474
+      7475 # SSH
     ];
   };
 
