@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -87,7 +87,9 @@
           "/staticstuff/psprices.rss" = {
             proxyPass = "https://psprices.com/region-de/rss/discounts/";
             extraConfig = ''
-              proxy_set_header cookie "sessionid_psprices=${config.age.secrets.psprices-token}";'';
+              proxy_set_header cookie "sessionid_psprices=${
+                lib.readfile config.age.secrets.psprices-token.path
+              }";'';
           };
         };
         enableACME = true;
