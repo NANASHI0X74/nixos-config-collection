@@ -86,10 +86,8 @@
         locations = {
           "/staticstuff/psprices.rss" = {
             proxyPass = "https://psprices.com/region-de/rss/discounts/";
-            extraConfig = ''
-              proxy_set_header cookie "sessionid_psprices=${
-                lib.readfile config.age.secrets.psprices-token.path
-              }";'';
+            extraConfig =
+              "include ${lib.readfile config.age.secrets.psprices-token.path};";
           };
         };
         enableACME = true;
