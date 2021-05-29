@@ -75,5 +75,25 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
+  services.nginx = {
+    enable = true;
+    recommendedTlsSettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      "nanashi0x74.dev" = {
+        locations = {
+          "/staticstuff/psprices.rss" = {
+            proxyPass = "https://psprices.com/region-de/rss/discounts/";
+            extraConfig = ''
+              proxy_set_header cookie "sessionid_psprices=${config.age.secrets.psprices-token}";'';
+          };
+        };
+        enableACME = true;
+        forceSSL = true;
+      };
+    };
+  };
 }
 
