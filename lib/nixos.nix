@@ -11,7 +11,6 @@ in {
       specialArgs = { inherit lib inputs system; };
       modules = [
         {
-          nixpkgs.pkgs = pkgs;
           networking.hostName =
             mkDefault (removeSuffix ".nix" (baseNameOf path));
         }
