@@ -9,6 +9,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
+    emacs-overlay.url  = "github:nix-community/emacs-overlay";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, self, agenix, ... }:
