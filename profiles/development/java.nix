@@ -2,4 +2,7 @@
 
 {
   programs.java.enable =true;
+  environment.systemPackages = with pkgs;[
+    maven
+  ];
 }
