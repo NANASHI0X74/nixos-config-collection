@@ -70,7 +70,6 @@
     networkmanagerapplet
     brave
     xclip
-    virt-manager
     (import ../../profiles/emacs.nix { inherit pkgs; })
     python3
     pciutils
@@ -93,8 +92,6 @@
     fish
   ];
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -183,7 +180,7 @@
         "camera"
         "docker"
         "adbusers"
-        "libvirtd"
+        # "libvirtd"
         "nixosadmin"
       ];
       group = "users";
