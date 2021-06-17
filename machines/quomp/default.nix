@@ -70,7 +70,7 @@
     networkmanagerapplet
     brave
     xclip
-    (import ../../profiles/emacs.nix { inherit pkgs; })
+    # (import ../../profiles/emacs.nix { inherit pkgs; })
     python3
     pciutils
     usbutils
@@ -91,6 +91,9 @@
     elvish
     fish
   ];
+
+  modules.editors.emacs.enable = true;
+
   virtualisation.docker.enable = true;
 
   programs.gnupg.agent = {
