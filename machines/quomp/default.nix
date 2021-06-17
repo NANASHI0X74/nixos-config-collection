@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ../../profiles/development/java.nix];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot = {
@@ -49,6 +49,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "slack" "hplip" ];
   environment.systemPackages = with pkgs; [
+    nixpkgs-fmt
     nodePackages.pyright
     direnv
     wmctrl
