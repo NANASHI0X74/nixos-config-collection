@@ -11,7 +11,9 @@
     };
     nginx = {
       enable = true;
-      virtualHosts."nanashi0x74.dev".locations.feedreader.root = pkgs.selfoss;
+      virtualHosts."nanashi0x74.dev".locations.feedreader.extraConfig = let fpm = config.services.phpfpm.pools.${config.services.selfoss.pool}; in ''
+         fastcgi_pass unix:${fpm.socket};
+      '';
     };
   };
 
