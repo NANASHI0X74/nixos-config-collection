@@ -14,6 +14,7 @@
     ../../profiles/ssh-decrypt.nix
     ../../profiles/openssh-config.nix
     ../../profiles/gitlab.nix
+    ../../profiles/webapps/selfoss.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
