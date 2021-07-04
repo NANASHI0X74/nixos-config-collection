@@ -5,6 +5,7 @@ in {
     # I use home-manager to deploy files to $HOME; little else
     [
       inputs.home-manager.nixosModules.home-manager
+      (import inputs.cachix-decl)
     ]
     # All my personal modules
     ++ (lib.my.mapModulesRec' (toString ./modules) import);
@@ -35,6 +36,7 @@ in {
     autoOptimiseStore = true;
   };
   system.configurationRevision = with inputs; mkIf (self ? rev) self.rev;
+  cachix =[ {name = "nix-community"; sha256 = "1r0dsyhypwqgw3i5c2rd5njay8gqw9hijiahbc2jvf0h52viyd9i";} ];
 
   ## Some reasonable, global defaults
   # This is here to appease 'nix flake check' for generic hosts with no

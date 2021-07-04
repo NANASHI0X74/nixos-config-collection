@@ -10,9 +10,13 @@
       inputs.nixpkgs.follows = "/nixpkgs";
     };
     emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    cachix-decl = {
+      url = "github:jonascarpay/declarative-cachix";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, self, agenix, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, self, agenix, cachix-decl, ... }:
     let
       inherit (lib.my) mapModules mapModulesRec mapHosts;
       system = "x86_64-linux";
@@ -29,7 +33,7 @@
         };
       });
     in {
-      nixosModules = { common = import ./.; } // mapModulesRec ./modules import;
+      nixosModules = { common = import ./.; cachix = import cachix-decl; } // mapModulesRec ./modules import;
       nixosConfigurations = mapHosts ./machines { };
     };
 }

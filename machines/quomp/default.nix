@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../../profiles/development/java.nix];
+  imports = [ ./hardware-configuration.nix ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot = {
@@ -84,6 +84,7 @@
     duc
     unzip
     rnix-lsp
+    cachix
     # plasma-browser-integration
 
     #shells
