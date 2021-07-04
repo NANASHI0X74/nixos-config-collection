@@ -4,7 +4,10 @@
   services = {
     selfoss = {
       enable = true;
-      database.type = "pgsql";
+      database = {
+        type = "pgsql";
+        password = "notsosecret";
+      };
     };
     nginx = {
       enable = true;
