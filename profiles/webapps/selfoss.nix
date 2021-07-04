@@ -11,9 +11,14 @@
     };
     nginx = {
       enable = true;
-      virtualHosts."nanashi0x74.dev".locations.feedreader.extraConfig = let fpm = config.services.phpfpm.pools.${config.services.selfoss.pool}; in ''
-         fastcgi_pass unix:${fpm.socket};
-      '';
+      virtualHosts."nanashi0x74.dev".locations.feedreader = {
+        extraConfig = let fpm = config.services.phpfpm.pools.${config.services.selfoss.pool}; in ''
+          fastcgi_split_path_info ^(.+\.php)(feedreader/.+)$;
+          fastcgi_pass unix:${fpm.socket};
+          include ${pkgs.nginx}/conf/fastcgi_params;
+          include ${pkgs.nginx}/conf/fastcgi.conf;
+        '';
+      };
     };
   };
 

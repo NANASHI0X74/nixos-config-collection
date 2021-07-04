@@ -33,7 +33,7 @@
         };
       });
     in {
-      nixosModules = { common = import ./.; cachix = import cachix-decl; } // mapModulesRec ./modules import;
+      nixosModules = { common = import ./.; } // mapModulesRec ./modules import;
       nixosConfigurations = mapHosts ./machines { };
     };
 }
