@@ -1,9 +1,6 @@
 {config, pkgs, ... }:
 {
   services = {
-    postgresql = {
-      enable = true;
-    };
     matrix-synapse = {
       enable = true;
       server_name = "nanashi0x74.dev";

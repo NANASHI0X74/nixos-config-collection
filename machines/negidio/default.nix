@@ -75,6 +75,12 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_12;
+    dataDir = "/var/lib/postgresql/12";
+  };
+
   services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
