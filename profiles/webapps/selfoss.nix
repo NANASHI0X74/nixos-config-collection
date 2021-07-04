@@ -12,6 +12,7 @@
     nginx = {
       enable = true;
       virtualHosts."nanashi0x74.dev".locations."/feedreader" = {
+        root = /var/lib/selfoss;
         extraConfig = let fpm = config.services.phpfpm.pools.${config.services.selfoss.pool}; in ''
           fastcgi_split_path_info ^(.+\.php)(feedreader/.+)$;
           fastcgi_pass unix:${fpm.socket};
