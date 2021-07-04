@@ -84,10 +84,12 @@
     virtualHosts = {
       "nanashi0x74.dev" = {
         extraConfig = ''
-          location = /staticstuff/psprices.rss" {
+          location = /staticstuff/psprices.rss {
               proxy_pass https://psprices.com/region-de/rss/discounts/;
+	      proxy_ssl_name psprices.com;
+	      proxy_ssl_server_name on;
               include ${config.age.secrets.psprices-token.path};
-          };
+          }
         '';
         enableACME = true;
         forceSSL = true;
