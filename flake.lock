@@ -20,6 +20,37 @@
         "type": "github"
       }
     },
+    "cachix-decl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622643640,
+        "narHash": "sha256-G24xzhY9vnfQB4UNjOK/vhtjyVxZkAl0drQn+Ksy/TY=",
+        "owner": "jonascarpay",
+        "repo": "declarative-cachix",
+        "rev": "82fcbb75db10b71b4962334723f75d2efd906859",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jonascarpay",
+        "repo": "declarative-cachix",
+        "type": "github"
+      }
+    },
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1625387450,
+        "narHash": "sha256-EXseXOFis3WCnIP8tINxwRUy6RXoiu5+L0XG5n1qnsM=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "53539776f1d79d610351e620c1ce6f87d956b782",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -27,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1622145920,
-        "narHash": "sha256-/tt6IApLuVcGP5auy4zjLzfm5+MBHYLS3Nauvv2U2EQ=",
+        "lastModified": 1625384440,
+        "narHash": "sha256-WnDK+LZioER6eeC8Sm7GPvbiS6XPyUqn+qtc2lvjLHo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0e6c61a44092e98ba1d75b41f4f947843dc7814d",
+        "rev": "ac319fd3149b23a3ad8ee24cb2def6e67acf194c",
         "type": "github"
       },
       "original": {
@@ -43,11 +74,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1622194753,
-        "narHash": "sha256-76qtvFp/vFEz46lz5iZMJ0mnsWQYmuGYlb0fHgKqqMg=",
+        "lastModified": 1625281901,
+        "narHash": "sha256-DkZDtTIPzhXATqIps2ifNFpnI+PTcfMYdcrx/oFm00Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "540dccb2aeaffa9dc69bfdc41c55abd7ccc6baa3",
+        "rev": "09c38c29f2c719cd76ca17a596c2fdac9e186ceb",
         "type": "github"
       },
       "original": {
@@ -60,6 +91,8 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "cachix-decl": "cachix-decl",
+        "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }

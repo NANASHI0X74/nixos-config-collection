@@ -49,6 +49,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "slack" "hplip" ];
   environment.systemPackages = with pkgs; [
+    nixpkgs-fmt
     nodePackages.pyright
     direnv
     wmctrl
@@ -69,8 +70,7 @@
     networkmanagerapplet
     brave
     xclip
-    virt-manager
-    (import ../../profiles/emacs.nix { inherit pkgs; })
+    # (import ../../profiles/emacs.nix { inherit pkgs; })
     python3
     pciutils
     usbutils
@@ -84,6 +84,7 @@
     duc
     unzip
     rnix-lsp
+    cachix
     # plasma-browser-integration
 
     #shells
@@ -91,9 +92,10 @@
     elvish
     fish
   ];
+
+  modules.editors.emacs.enable = true;
+
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -182,7 +184,7 @@
         "camera"
         "docker"
         "adbusers"
-        "libvirtd"
+        # "libvirtd"
         "nixosadmin"
       ];
       group = "users";

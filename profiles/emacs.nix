@@ -11,7 +11,7 @@
 
    $ ./result/bin/emacs
 */
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs }:
 
 let
   myEmacs = pkgs.emacs;
