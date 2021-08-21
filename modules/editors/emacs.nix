@@ -5,12 +5,13 @@ let
   inherit (lib) mkIf;
   inherit (lib.my) mkBoolOpt;
   cfg = config.modules.editors.emacs;
-    configDir = config.dotfiles.configDir;
-in {
+  configDir = config.dotfiles.configDir;
+in
+{
   options.modules.editors.emacs = {
     enable = mkBoolOpt false;
     doom = {
-      enable  = mkBoolOpt true;
+      enable = mkBoolOpt true;
       fromSSH = mkBoolOpt false;
     };
   };
@@ -20,25 +21,27 @@ in {
 
     user.packages = with pkgs; [
       ## Emacs itself
-      binutils       # native-comp needs 'as', provided by this
-      emacsPgtkGcc   # 28 + pgtk + native-comp
+      binutils # native-comp needs 'as', provided by this
+      emacsPgtkGcc # 28 + pgtk + native-comp
 
       ## Doom dependencies
       git
-      (ripgrep.override {withPCRE2 = true;})
-      gnutls              # for TLS connectivity
+      (ripgrep.override { withPCRE2 = true; })
+      gnutls # for TLS connectivity
 
       ## Optional dependencies
-      fd                  # faster projectile indexing
-      imagemagick         # for image-dired
+      fd # faster projectile indexing
+      imagemagick # for image-dired
       (mkIf (config.programs.gnupg.agent.enable)
-        pinentry_emacs)   # in-emacs gnupg prompts
-      zstd                # for undo-fu-session/undo-tree compression
+        pinentry_emacs) # in-emacs gnupg prompts
+      zstd # for undo-fu-session/undo-tree compression
 
       ## Module dependencies
       # :checkers spell
       (aspellWithDicts (ds: with ds; [
-        en en-computers en-science
+        en
+        en-computers
+        en-science
       ]))
       # :checkers grammar
       languagetool
