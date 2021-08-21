@@ -66,9 +66,8 @@
     wget
     neovim
     git
-    firefox
     networkmanagerapplet
-    brave
+
     xclip
     # (import ../../profiles/emacs.nix { inherit pkgs; })
     python3
@@ -86,6 +85,10 @@
     rnix-lsp
     cachix
     # plasma-browser-integration
+    # browsers
+    firefox
+    brave
+    nyxt
 
     #shells
     zsh
