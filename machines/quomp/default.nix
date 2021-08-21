@@ -65,7 +65,6 @@
     docker-compose
     wget
     neovim
-    git
     networkmanagerapplet
 
     xclip
@@ -97,6 +96,7 @@
   ];
 
   modules.editors.emacs.enable = true;
+  modules.dev.git.enable = true;
 
   virtualisation.docker.enable = true;
 
