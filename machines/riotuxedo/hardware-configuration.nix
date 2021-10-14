@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   boot.initrd = {
-    luks.devices."root" = {
+    luks.devices."cryptroot" = {
       device = "/dev/disk/by-uuid/715ec013-991d-4794-a940-6dfbceb939b6";
       preLVM = true;
       allowDiscards = true;

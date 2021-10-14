@@ -4,20 +4,13 @@
   imports = [ ./hardware-configuration.nix ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot = {
-    initrd = {
-      luks.devices = {
-        cryptroot = {
-          device = "/dev/disk/by-uuid/53dbd74a-a4bc-4295-ac33-3294643994e7";
-          preLVM = true;
-        };
-      };
-    };
-  };
 
   networking = {
-    hostName = "quomp";
-    interfaces.wlp0s20f3.useDHCP = true;
+    hostName = "riotuxedo";
+    interfaces = {
+      enp53s0.useDHCP = true;
+      wlp54s0.useDHCP = true;
+    };
     networkmanager.enable = true;
     firewall = {
       allowedTCPPorts = [ 8080 8000 ];
@@ -47,7 +40,7 @@
   time.timeZone = "Europe/Berlin";
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "slack" "hplip" ];
+    builtins.elem (lib.getName pkg) [ "slack" ];
   environment.systemPackages = with pkgs; [
     nixpkgs-fmt
     nodePackages.pyright
@@ -77,7 +70,6 @@
     pinentry
     pinentry-qt
     chiaki
-    hplipWithPlugin
     kdeconnect
     duc
     unzip
@@ -97,9 +89,6 @@
 
   modules.editors.emacs.enable = true;
   modules.dev.git.enable = true;
-
-  virtualisation.docker.enable = true;
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -118,10 +107,7 @@
 
   sound.enable = true;
   hardware = {
-    pulseaudio = {
-      enable = true;
-      configFile = ../../non-nix/pulseaudio/default.pa;
-    };
+    pulseaudio.enable = true;
     bluetooth.enable = true;
   };
 
@@ -137,45 +123,9 @@
         touchpad.clickMethod = "clickfinger";
       };
     };
-    printing = {
-      enable = true;
-      drivers = with pkgs; [ gutenprint hplip hplipWithPlugin ];
-    };
     lorri.enable = true;
-    blueman.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns = true;
-    };
-
   };
-  #fix for displaymanager not starting on boot
-  systemd.services = {
-    display-manager.wants = [
-      "systemd-user-sessions.service"
-      "multi-user.target"
-      "network-online.target"
-    ];
-    display-manager.after = [
-      "systemd-user-sessions.service"
-      "multi-user.target"
-      "network-online.target"
-    ];
-  };
-
-  # services.xserver.videoDrivers = [ "nvidia" ];
-
-  # hardware.nvidia = {
-  #   prime = {
-  #     offload.enable = true;
-  #     nvidiaBusId = "PCI:1:0:0";
-  #     intelBusId = "PCI:0:2:0";
-  #   };
-  # };
-  # security.pam.services.logind.fprintAuth = true;
-
   users = {
-    groups = { nixosadmin = { }; };
     users.nanashi = {
       isNormalUser = true;
       extraGroups = [
@@ -185,22 +135,12 @@
         "disk"
         "networkmanager"
         "camera"
-        "docker"
         "adbusers"
-        # "libvirtd"
-        "nixosadmin"
       ];
       group = "users";
       shell = pkgs.fish;
     };
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "21.05";
 
 }
