@@ -126,6 +126,10 @@
       };
     };
     lorri.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.gutenprint ];
+    };
   };
   users = {
     users.nanashi = {
