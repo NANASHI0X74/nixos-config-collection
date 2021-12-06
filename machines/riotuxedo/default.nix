@@ -142,6 +142,7 @@
         "networkmanager"
         "camera"
         "adbusers"
+        "docker"
       ];
       group = "users";
       shell = pkgs.fish;
