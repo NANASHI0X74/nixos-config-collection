@@ -112,7 +112,7 @@
     bluetooth.enable = true;
     tuxedo-keyboard.enable = true;
   };
-
+  virtualisation.docker.enable = true;
   services = {
     xserver = {
       enable = true;
