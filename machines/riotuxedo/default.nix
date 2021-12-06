@@ -110,6 +110,7 @@
   hardware = {
     pulseaudio.enable = true;
     bluetooth.enable = true;
+    tuxedo-keyboard.enable = true;
   };
 
   services = {
