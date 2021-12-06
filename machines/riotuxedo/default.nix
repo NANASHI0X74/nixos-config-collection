@@ -87,20 +87,22 @@
 
   modules.editors.emacs.enable = true;
   modules.dev.git.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "qt";
-  };
-  programs.gphoto2.enable = true;
-  programs.browserpass.enable = true;
-  programs.adb.enable = true;
-  programs.dconf.enable = true;
-  programs.tmux = {
-    enable = true;
-    keyMode = "vi";
-    extraConfig = "set -g mouse on";
-    newSession = true;
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "qt";
+    };
+    gphoto2.enable = true;
+    browserpass.enable = true;
+    adb.enable = true;
+    dconf.enable = true;
+    tmux = {
+      enable = true;
+      keyMode = "vi";
+      extraConfig = "set -g mouse on";
+      newSession = true;
+    };
   };
 
   sound.enable = true;
