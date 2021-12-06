@@ -116,8 +116,8 @@
   services = {
     xserver = {
       enable = true;
-      layout = "gb";
-      xkbOptions = "eurosign:e";
+      layout = "gb,de";
+      xkbOptions = "eurosign:e,grp:caps_switch";
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
       libinput = {
