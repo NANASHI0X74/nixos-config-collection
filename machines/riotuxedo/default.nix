@@ -86,8 +86,13 @@
     fish
   ];
 
-  modules.editors.emacs.enable = true;
-  modules.dev.git.enable = true;
+  modules = {
+    editors.emacs.enable = true;
+    dev = {
+      git.enable = true;
+      tmux.enable = true;
+    };
+  };
   programs = {
     gnupg.agent = {
       enable = true;
@@ -98,12 +103,6 @@
     browserpass.enable = true;
     adb.enable = true;
     dconf.enable = true;
-    tmux = {
-      enable = true;
-      keyMode = "vi";
-      extraConfig = "set -g mouse on";
-      newSession = true;
-    };
   };
 
   sound.enable = true;
