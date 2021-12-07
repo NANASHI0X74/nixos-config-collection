@@ -18,7 +18,7 @@
 
   outputs = inputs@{ nixpkgs, home-manager, self, agenix, cachix-decl, ... }:
     let
-      inherit (lib.my) mapModules mapModulesRec mapHosts;
+      inherit (lib.my) mapModulesRec mapHosts;
       system = "x86_64-linux";
       mkPkgs = pkgs: extraOverlays:
         import pkgs {
