@@ -3,7 +3,7 @@
 { options, config, inputs, lib, pkgs, ... }:
 
 let
-  inherit (builtins) pathExists filter;
+  inherit (builtins) pathExists filter removeAttrs;
   inherit (lib) mapAttrs' nameValuePair removeSuffix mkDefault;
   inherit (inputs) agenix;
   secretsDir = "${toString ../machines}/${config.networking.hostName}/secrets";
@@ -14,11 +14,11 @@ in {
 
   age = {
     secrets = if pathExists secretsFile then
-      mapAttrs' (n: _:
-        nameValuePair (removeSuffix ".age" n) {
-          file = "${secretsDir}/${n}";
-          owner = mkDefault config.user.name;
-        }) (import secretsFile)
+      mapAttrs' (n: v:
+        nameValuePair
+          (removeSuffix ".age" n)
+          (removeAttrs v ["publicKeys"]))
+        (import secretsFile)
     else
       { };
     identityPaths = options.age.identityPaths.default ++ (filter pathExists [
