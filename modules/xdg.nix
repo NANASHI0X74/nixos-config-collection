@@ -8,10 +8,10 @@
       # These are the defaults, and xdg.enable does set them, but due to load
       # order, they're not set before environment.variables are set, which could
       # cause race conditions.
-      XDG_CACHE_HOME  = "$HOME/.cache";
+      XDG_CACHE_HOME = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME   = "$HOME/.local/share";
-      XDG_BIN_HOME    = "$HOME/.local/bin";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_BIN_HOME = "$HOME/.local/bin";
     };
     # variables = {
     #   # Conform more programs to XDG conventions. The rest are handled by their
@@ -30,9 +30,9 @@
     # };
 
     # Move ~/.Xauthority out of $HOME
-  #   extraInit = ''
-  #     export XAUTHORITY=/tmp/Xauthority
-  #     [ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
-  #   '';
+    #   extraInit = ''
+    #     export XAUTHORITY=/tmp/Xauthority
+    #     [ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
+    #   '';
   };
 }

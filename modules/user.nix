@@ -24,7 +24,7 @@ let
 in
 {
   options = with types; {
-    user = mkOpt attrs {};
+    user = mkOpt attrs { };
 
     dotfiles =
       {
@@ -41,9 +41,9 @@ in
       };
 
     home = {
-      file = mkOpt' attrs {} "Files to place directly in $HOME";
-      configFile = mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
-      dataFile = mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
+      file = mkOpt' attrs { } "Files to place directly in $HOME";
+      configFile = mkOpt' attrs { } "Files to place in $XDG_CONFIG_HOME";
+      dataFile = mkOpt' attrs { } "Files to place in $XDG_DATA_HOME";
     };
 
     env = mkOption {
@@ -55,16 +55,17 @@ in
           else
             (toString v)
       );
-      default = {};
+      default = { };
       description = "TODO";
     };
   };
 
   config = {
-    user = let
-      user = builtins.getEnv "USER";
-      name = if elem user [ "" "root" ] then "nanashi" else user;
-    in
+    user =
+      let
+        user = builtins.getEnv "USER";
+        name = if elem user [ "" "root" ] then "nanashi" else user;
+      in
       {
         inherit name;
         description = "The primary user account";
@@ -77,12 +78,13 @@ in
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
 
-    nix = let
-      users = [ "root" config.user.name ];
-    in
+    nix.settings =
+      let
+        users = [ "root" config.user.name ];
+      in
       {
-        trustedUsers = users;
-        allowedUsers = users;
+        trusted-users = users;
+        allowed-users = users;
       };
 
     # must already begin with pre-existing PATH. Also, can't use binDir here,

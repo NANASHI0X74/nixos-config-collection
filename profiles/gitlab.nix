@@ -1,7 +1,9 @@
-{config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
-  security.acme.email = "rian.lindenberger@gmail.com";
-  security.acme.acceptTerms = true;
+  security.acme = {
+    defaults.email = "rian.lindenberger@gmail.com";
+    acceptTerms = true;
+  };
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;

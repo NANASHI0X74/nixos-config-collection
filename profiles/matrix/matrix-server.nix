@@ -1,4 +1,4 @@
-{config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services = {
     matrix-synapse = {
@@ -16,7 +16,8 @@
         "/var/lib/matrix-synapse/telegram-registration.yaml"
       ];
       listeners = [
-        { #federation
+        {
+          #federation
           bind_address = "";
           port = 8448;
           resources = [
@@ -27,7 +28,8 @@
           type = "http";
           x_forwarded = false;
         }
-        { # client
+        {
+          # client
           bind_address = "127.0.0.1";
           port = 8008;
           resources = [
@@ -55,7 +57,8 @@
             "= /.well-known/matrix/server".extraConfig =
               let
                 server = { "m.server" = "matrix.nanashi0x74.dev:8448"; };
-              in ''
+              in
+              ''
                 add_header Content-Type application/json;
                 return 200 '${builtins.toJSON server}';
               '';
@@ -63,11 +66,12 @@
             "= /.well-known/matrix/client".extraConfig =
               let
                 client = {
-                  "m.homeserver" =  { "base_url" = "https://matrix.nanashi0x74.dev"; };
-                  "m.identity_server" =  { "base_url" = "https://vector.im"; };
+                  "m.homeserver" = { "base_url" = "https://matrix.nanashi0x74.dev"; };
+                  "m.identity_server" = { "base_url" = "https://vector.im"; };
                 };
                 # ACAO required to allow riot-web on any URL to request this json file
-              in ''
+              in
+              ''
                 add_header Content-Type application/json;
                 add_header Access-Control-Allow-Origin *;
                 return 200 '${builtins.toJSON client}';
@@ -96,10 +100,10 @@
     };
     "matrix.nanashi0x74.dev" = {
       postRun = ''
-                    cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;
-                    cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;
-                    systemctl reload nginx.service;
-                    systemctl restart matrix-synapse.service;
+        cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;
+        cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;
+        systemctl reload nginx.service;
+        systemctl restart matrix-synapse.service;
       '';
       email = "rian.lindenberger@gmail.com";
     };

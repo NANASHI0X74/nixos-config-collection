@@ -8,19 +8,22 @@ let
   inherit (inputs) agenix;
   secretsDir = "${toString ../machines}/${config.networking.hostName}/secrets";
   secretsFile = "${secretsDir}/secrets.nix";
-in {
+in
+{
   imports = [ agenix.nixosModules.age ];
   environment.systemPackages = [ agenix.defaultPackage.x86_64-linux ];
 
   age = {
-    secrets = if pathExists secretsFile then
-      mapAttrs' (n: v:
-        nameValuePair
-          (removeSuffix ".age" n)
-          (removeAttrs v ["publicKeys"]))
-        (import secretsFile)
-    else
-      { };
+    secrets =
+      if pathExists secretsFile then
+        mapAttrs'
+          (n: v:
+            nameValuePair
+              (removeSuffix ".age" n)
+              (removeAttrs v [ "publicKeys" ]))
+          (import secretsFile)
+      else
+        { };
     identityPaths = options.age.identityPaths.default ++ (filter pathExists [
       "${config.user.home}/.ssh/id_ed25519"
       "${config.user.home}/.ssh/id_rsa"

@@ -1,5 +1,5 @@
 # from https://nixos.wiki/wiki/Wireguard
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   imports = [ ./restart-after-upgrade.nix ];
   networking.firewall.allowedUDPPorts = [ 58531 ];
@@ -25,7 +25,7 @@
           publicKey = "j/WWETRqOr+CwXlqJaAHDcT9pHF/0DfyMQBeUoRGXHY=";
 
           # Forward all the traffic via VPN.
-          allowedIPs = [ "10.100.0.1"] ++ import ../../resources/publicnets.nix;
+          allowedIPs = [ "10.100.0.1" ] ++ import ../../resources/publicnets.nix;
 
           # Set this to the server IP and port.
           endpoint = "51.15.10.88:51820";

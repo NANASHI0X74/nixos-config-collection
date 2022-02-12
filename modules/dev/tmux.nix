@@ -13,10 +13,10 @@ in
   config = mkIf cfg.enable {
     environment = {
       etc = {
-       "tmux.conf".source = ../../non-nix/tmux/tmux.conf;
-       "tmux.remote.conf".source = ../../non-nix/tmux/tmux.remote.conf;
+        "tmux.conf".source = ../../non-nix/tmux/tmux.conf;
+        "tmux.remote.conf".source = ../../non-nix/tmux/tmux.remote.conf;
       };
-      systemPackages = [ pkgs.tmux yank renew_env];
+      systemPackages = [ pkgs.tmux yank renew_env ];
     };
   };
 }
