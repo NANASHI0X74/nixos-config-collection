@@ -37,16 +37,15 @@
     keyMap = "uk";
   };
   time.timeZone = "Europe/Berlin";
-
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "slack" ];
   environment.systemPackages = with pkgs; [
     nixpkgs-fmt
     nodePackages.pyright
-    direnv
     wmctrl
     spectacle
     element-desktop
+    file
     ripgrep
     coreutils
     fd
@@ -91,6 +90,7 @@
     dev = {
       git.enable = true;
       tmux.enable = true;
+      direnv.enable = true;
     };
   };
   programs = {
@@ -129,6 +129,7 @@
       enable = true;
       drivers = [ pkgs.gutenprint ];
     };
+    auto-cpufreq.enable = true;
   };
   users = {
     users.nanashi = {
