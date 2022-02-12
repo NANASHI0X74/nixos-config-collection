@@ -9,10 +9,12 @@ in
   options.modules.dev.direnv.enable = mkBoolOpt false;
 
   config = mkIf cfg.enable {
-    programs.direnv = {
-      enable = true;
-      config = {
-        skip_dotenv = true;
+    home-manager.users.${config.user.name} = {
+      programs.direnv = {
+        enable = true;
+        config = {
+          skip_dotenv = true;
+        };
       };
     };
   };
