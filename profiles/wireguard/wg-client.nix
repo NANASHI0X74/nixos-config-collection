@@ -8,8 +8,7 @@
       privateKeyFile = "/root/wireguard-keys/private";
       peers = [{
         publicKey = "j/WWETRqOr+CwXlqJaAHDcT9pHF/0DfyMQBeUoRGXHY=";
-        allowedIPs = [ "0.0.0.0/0" ];
-        allowedIPsAsRoutes = false;
+        allowedIPs = [ "10.100.0.0/24" ];
         endpoint = "51.15.10.88:51820";
         persistentKeepalive = 25;
       }];
