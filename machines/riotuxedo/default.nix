@@ -63,10 +63,14 @@
     python3
     pciutils
     usbutils
-    pass
+
+    # password store
+    (pass.withExtensions
+      (p: with p; [ pass-otp ]))
     gnupg
     pinentry
     pinentry-qt
+
     chiaki
     kdeconnect
     duc
