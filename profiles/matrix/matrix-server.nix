@@ -3,46 +3,49 @@
   services = {
     matrix-synapse = {
       enable = true;
-      server_name = "nanashi0x74.dev";
-      # public_baseurl = "https://matrix.nanashi0x74.tech";
-      tls_certificate_path = "/etc/matrix-synapse/certs/fullchain.pem";
-      tls_private_key_path = "/etc/matrix-synapse/certs/key.pem";
-      registration_shared_secret = "notasecret";
-      database_type = "psycopg2";
-      database_args = {
-        database = "matrix-synapse";
+      settings = {
+        server_name = "nanashi0x74.dev";
+        tls_certificate_path = "/etc/matrix-synapse/certs/fullchain.pem";
+        tls_private_key_path = "/etc/matrix-synapse/certs/key.pem";
+        registration_shared_secret = "notasecret";
+
+        database = {
+          name = "psycopg2";
+          args = {
+            database = "matrix-synapse";
+          };
+        };
+
+        max_upload_size = "100M";
+        listeners = [
+          {
+            #federation
+            bind_addresses = [ "" ];
+            port = 8448;
+            resources = [
+              { compress = true; names = [ "client" ]; }
+              { compress = false; names = [ "federation" ]; }
+            ];
+            tls = true;
+            type = "http";
+            x_forwarded = false;
+          }
+          {
+            # client
+            bind_addresses = [ "127.0.0.1" ];
+            port = 8008;
+            resources = [
+              { compress = true; names = [ "client" ]; }
+            ];
+            tls = false;
+            type = "http";
+            x_forwarded = true;
+          }
+        ];
+        app_service_config_files = [
+          "/var/lib/matrix-synapse/telegram-registration.yaml"
+        ];
       };
-      app_service_config_files = [
-        "/var/lib/matrix-synapse/telegram-registration.yaml"
-      ];
-      listeners = [
-        {
-          #federation
-          bind_address = "";
-          port = 8448;
-          resources = [
-            { compress = true; names = [ "client" "webclient" ]; }
-            { compress = false; names = [ "federation" ]; }
-          ];
-          tls = true;
-          type = "http";
-          x_forwarded = false;
-        }
-        {
-          # client
-          bind_address = "127.0.0.1";
-          port = 8008;
-          resources = [
-            { compress = true; names = [ "client" "webclient" ]; }
-          ];
-          tls = false;
-          type = "http";
-          x_forwarded = true;
-        }
-      ];
-      extraConfig = ''
-        max_upload_size: "100M"
-      '';
     };
     # web client proxy and setup certs
     nginx = {
