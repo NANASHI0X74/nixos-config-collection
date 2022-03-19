@@ -22,7 +22,7 @@ in
     user.packages = with pkgs; [
       ## Emacs itself
       binutils # native-comp needs 'as', provided by this
-      ((emacsPackagesNgGen emacsGcc).emacsWithPackages (epkgs: [
+      ((emacsPackagesFor emacsGcc).emacsWithPackages (epkgs: [
         epkgs.vterm
       ]))
 
