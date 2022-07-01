@@ -31,7 +31,7 @@
       ];
     };
   };
-  i18n.defaultLocale = "en_GB.utf8";
+  i18n.defaultLocale = "en_GB.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "uk";
@@ -39,56 +39,64 @@
   time.timeZone = "Europe/Berlin";
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "slack" ];
-  environment.systemPackages = with pkgs; [
-    nixpkgs-fmt
-    nodePackages.pyright
-    wmctrl
-    spectacle
-    element-desktop
-    file
-    ripgrep
-    coreutils
-    fd
-    slack
-    tmux
-    nodejs-14_x
-    docker
-    docker-compose
-    wget
-    neovim
-    networkmanagerapplet
+  environment = {
+    systemPackages = with pkgs; [
+      nixpkgs-fmt
+      nodePackages.pyright
+      wmctrl
+      spectacle
+      element-desktop
+      file
+      ripgrep
+      coreutils
+      fd
+      slack
+      tmux
+      nodejs-14_x
+      docker
+      docker-compose
+      wget
+      neovim
+      networkmanagerapplet
+      kontact
+      korganizer
+      akonadi
+      # kdav
 
-    xclip
-    # (import ../../profiles/emacs.nix { inherit pkgs; })
-    python3
-    pciutils
-    usbutils
+      xclip
+      # (import ../../profiles/emacs.nix { inherit pkgs; })
+      python3
+      pciutils
+      usbutils
 
-    # password store
-    (pass.withExtensions
-      (p: with p; [ pass-otp ]))
-    gnupg
-    pinentry
-    pinentry-qt
+      # password store
+      (pass.withExtensions
+        (p: with p; [ pass-otp ]))
+      gnupg
+      pinentry
+      pinentry-qt
 
-    chiaki
-    kdeconnect
-    duc
-    unzip
-    rnix-lsp
-    cachix
-    # plasma-browser-integration
-    # browsers
-    firefox
-    brave
-    nyxt
+      keybase-gui
+      chiaki
+      kdeconnect
+      duc
+      unzip
+      rnix-lsp
+      cachix
+      # plasma-browser-integration
+      # browsers
+      firefox-wayland
+      brave
+      nyxt
 
-    #shells
-    zsh
-    elvish
-    fish
-  ];
-
+      ytmdesktop
+      #shells
+      zsh
+      elvish
+      fish
+    ];
+    sessionVariables.NIXOS_OZONE_WL = "1";
+  };
   modules = {
     editors.emacs.enable = true;
     dev = {
@@ -109,31 +117,41 @@
     dconf.enable = true;
   };
 
-  sound.enable = true;
   hardware = {
-    pulseaudio.enable = true;
     bluetooth.enable = true;
     tuxedo-keyboard.enable = true;
+    tuxedo-control-center.enable = true;
   };
   virtualisation.docker.enable = true;
+
+  security.rtkit.enable = true;
   services = {
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+    };
     xserver = {
       enable = true;
       layout = "gb,de";
-      xkbOptions = "eurosign:e,grp:caps_switch";
+      # xkbOptions = "eurosign:e,grp:caps_switch";
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
-      libinput = {
-        enable = true;
-        touchpad.clickMethod = "clickfinger";
-      };
+      # libinput = {
+      #   enable = true;
+      #   touchpad.clickMethod = "clickfinger";
+      # };
     };
     lorri.enable = true;
+    keybase.enable = true;
+    kbfs.enable = true;
     printing = {
       enable = true;
       drivers = [ pkgs.gutenprint ];
     };
-    auto-cpufreq.enable = true;
   };
   users = {
     users.nanashi = {
@@ -153,5 +171,4 @@
     };
   };
   system.stateVersion = "21.05";
-
 }

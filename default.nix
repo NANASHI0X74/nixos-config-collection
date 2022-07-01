@@ -6,6 +6,7 @@ in
     # I use home-manager to deploy files to $HOME; little else
     [
       inputs.home-manager.nixosModules.home-manager
+      inputs.tuxedo-nixos.nixosModule
     ]
     # All my personal modules
     ++ (lib.my.mapModulesRec' (toString ./modules) import);
