@@ -33,6 +33,11 @@
         preLVM = true;
         allowDiscards = true;
       };
+      "cryptsata2" = {
+        device = "/dev/disk/by-uuid/45f0e79b-bbfc-4a7d-9686-b1604f792b10";
+        preLVM = true;
+        allowDiscards = true;
+      };
     };
   };
 
@@ -105,4 +110,3 @@
     };
   };
 }
-
