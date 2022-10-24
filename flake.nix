@@ -10,10 +10,6 @@
       inputs.nixpkgs.follows = "/nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    tuxedo-nixos = {
-      url = "github:blitz/tuxedo-nixos";
-      inputs.nixpkgs.follows = "/nixpkgs";
-    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, self, agenix, ... }:
