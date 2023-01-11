@@ -2,8 +2,13 @@
 
 {
   imports = [ ./hardware-configuration.nix ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" ];
+  };
 
   networking = {
     hostName = "riotuxedo";
@@ -38,7 +43,7 @@
   };
   time.timeZone = "Europe/Berlin";
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "slack" ];
+    builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" ];
   environment = {
     systemPackages = with pkgs; [
       nixpkgs-fmt
@@ -106,6 +111,7 @@
     };
   };
   programs = {
+    steam.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
