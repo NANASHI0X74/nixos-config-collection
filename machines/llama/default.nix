@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
-    ../../hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../profiles/defaults-servers.nix
     ../../profiles/openssh-config.nix
     ../../profiles/wireguard/wg-server.nix
@@ -16,7 +16,7 @@
   environment.systemPackages = with pkgs; [ neovim git ];
 
   networking = {
-    hostname = "llama";
+    hostName = "llama";
     firewall = {
       enable = true;
       allowedTCPPorts = [
