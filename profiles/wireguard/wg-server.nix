@@ -10,7 +10,7 @@
   networking = {
     nat = {
       enable = true;
-      externalInterface = "eth0";
+      externalInterface = "ens3";
       internalInterfaces = [ "wg0" ];
       forwardPorts = [
         {
