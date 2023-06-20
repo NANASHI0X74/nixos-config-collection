@@ -84,7 +84,7 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_12;
+    package = pkgs.postgresql_15;
   };
 
   services.nginx = {
