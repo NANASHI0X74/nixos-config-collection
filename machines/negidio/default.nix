@@ -15,6 +15,7 @@
     ../../profiles/ssh-decrypt.nix
     ../../profiles/openssh-config.nix
     ../../profiles/gitlab.nix
+    ../../resources/script/postgres_update.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -84,7 +85,6 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_12;
-    dataDir = "/var/lib/postgresql/12";
   };
 
   services.nginx = {
