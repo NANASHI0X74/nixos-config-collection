@@ -109,6 +109,7 @@
       tmux.enable = true;
       direnv.enable = true;
     };
+    desktop.enable = true;
   };
   programs = {
     steam.enable = true;
@@ -132,25 +133,6 @@
 
   security.rtkit.enable = true;
   services = {
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-    };
-    xserver = {
-      enable = true;
-      layout = "gb,de";
-      # xkbOptions = "eurosign:e,grp:caps_switch";
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
-      # libinput = {
-      #   enable = true;
-      #   touchpad.clickMethod = "clickfinger";
-      # };
-    };
     lorri.enable = true;
     keybase.enable = true;
     kbfs.enable = true;
