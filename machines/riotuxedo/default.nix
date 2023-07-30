@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -46,6 +46,10 @@
     builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" ];
   environment = {
     systemPackages = with pkgs; [
+      wl-clipboard
+      qmk
+      virt-manager
+      gnome.gnome-boxes
       nixpkgs-fmt
       nodePackages.pyright
       wmctrl
@@ -57,7 +61,6 @@
       fd
       slack
       tmux
-      nodejs-14_x
       docker
       docker-compose
       wget
@@ -66,10 +69,10 @@
       kontact
       korganizer
       akonadi
+      inputs.devenv.packages.x86_64-linux.devenv
       # kdav
 
       xclip
-      # (import ../../profiles/emacs.nix { inherit pkgs; })
       python3
       pciutils
       usbutils
@@ -78,27 +81,26 @@
       (pass.withExtensions
         (p: with p; [ pass-otp ]))
       gnupg
-      pinentry
-      pinentry-qt
 
       keybase-gui
       chiaki
-      kdeconnect
+      plasma5Packages.kdeconnect-kde
       duc
       unzip
       rnix-lsp
       cachix
       # plasma-browser-integration
+
       # browsers
       firefox-wayland
       brave
-      nyxt
+      # nyxt
+      tridactyl-native
 
       ytmdesktop
       #shells
       zsh
       elvish
-      fish
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
   };
@@ -112,11 +114,11 @@
     desktop.enable = true;
   };
   programs = {
+    fish.enable = true;
     steam.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "qt";
     };
     gphoto2.enable = true;
     browserpass.enable = true;
@@ -127,12 +129,20 @@
   hardware = {
     bluetooth.enable = true;
     tuxedo-keyboard.enable = true;
-    tuxedo-control-center.enable = true;
   };
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+  };
   services = {
+    udev.packages = [
+      pkgs.qmk-udev-rules
+    ];
     lorri.enable = true;
     keybase.enable = true;
     kbfs.enable = true;

@@ -3,15 +3,22 @@
 let
   inherit (lib) mkIf;
   inherit (lib.my) mkBoolOpt;
-  cfg = config.modules.editors.emacs;
-  configDir = config.dotfiles.configDir;
+  cfg = config.modules.desktop;
 in
 {
   options.modules.desktop = {
     enable = mkBoolOpt false;
   };
-  config = {
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; with libsForQt5;[
+      gnome.gnome-tweaks
+      gnomeExtensions.appindicator
+      kwallet
+      kwallet-pam
+    ];
     services = {
+      gnome.gnome-keyring.enable = lib.mkForce false;
+      udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
       pipewire = {
         enable = true;
         alsa = {
@@ -23,13 +30,10 @@ in
       xserver = {
         enable = true;
         layout = "gb,de";
-        # xkbOptions = "eurosign:e,grp:caps_switch";
-        displayManager = {
-          sddm.enable = true;
-          defaultSession = "plasmawayland";
-        };
+        xkbOptions = "eurosign:e,grp:caps_switch";
+        displayManager.gdm.enable = true;
         desktopManager = {
-          plasma5.enable = true;
+          # plasma5.enable = true;
           gnome.enable = true;
         };
         # libinput = {
@@ -40,7 +44,9 @@ in
     };
 
     # following are needed because of conflicting configs in different enabled desktop envs
-    hardware.pulseaudio.enable = false; # pulseaudio is used instead, needed because gnome enables it by default
-    programs.seahorse.enable = false;
+    hardware.pulseaudio.enable = false; # pipewire is used instead, needed because gnome enables it by default
+    programs.ssh.askPassword = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+
+    security.pam.services.login.enableKwallet = true;
   };
 }
