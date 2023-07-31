@@ -112,6 +112,7 @@
       direnv.enable = true;
     };
     desktop.enable = true;
+    syncthing.enable = true;
   };
   programs = {
     fish.enable = true;
