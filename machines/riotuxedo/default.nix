@@ -113,6 +113,7 @@
     };
     desktop.enable = true;
     syncthing.enable = true;
+    anbox.enable = true;
   };
   programs = {
     fish.enable = true;
