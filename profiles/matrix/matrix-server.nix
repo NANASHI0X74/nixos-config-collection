@@ -42,9 +42,6 @@
             x_forwarded = true;
           }
         ];
-        app_service_config_files = [
-          "/var/lib/matrix-synapse/telegram-registration.yaml"
-        ];
       };
     };
     # web client proxy and setup certs
@@ -96,46 +93,21 @@
     };
   };
 
-  security.acme.certs = {
-    "nanashi0x74.dev" = {
-      postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
-      email = "rian.lindenberger@gmail.com";
-    };
-    "matrix.nanashi0x74.dev" = {
-      postRun = ''
-        cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;
-        cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;
-        systemctl reload nginx.service;
-        systemctl restart matrix-synapse.service;
-      '';
-      email = "rian.lindenberger@gmail.com";
-    };
-  };
-  security.acme.acceptTerms = true;
-
-  services.mautrix-telegram = {
-    enable = true;
-    environmentFile = /etc/secrets/mautrix-telegram.env; # file containing the appservice and telegram tokens
-    # The appservice is pre-configured to use SQLite by default. It's also possible to use PostgreSQL.
-    settings = {
-      homeserver = {
-        address = "http://localhost:8008";
-        domain = "nanashi0x74.dev";
+  security.acme = {
+    acceptTerms = true;
+    certs = {
+      "nanashi0x74.dev" = {
+        postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
+        email = "rian.lindenberger@gmail.com";
       };
-      appservice = {
-        provisioning.enabled = false;
-        id = "@telegrambot:nanashi0x74.dev";
-        public = {
-          enabled = true;
-          prefix = "/public";
-          external = "http://matrix.nanashi0x74.dev/public";
-        };
-      };
-      bridge = {
-        relaybot.authless_portals = false;
-        permissions = {
-          "@donjoe:nanashi0x74.dev" = "admin";
-        };
+      "matrix.nanashi0x74.dev" = {
+        postRun = ''
+          cp /var/lib/acme/matrix.nanashi0x74.dev/key.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/key.pem;
+          cp /var/lib/acme/matrix.nanashi0x74.dev/fullchain.pem /etc/matrix-synapse/certs && chown matrix-synapse:matrix-synapse /etc/matrix-synapse/certs/fullchain.pem;
+          systemctl reload nginx.service;
+          systemctl restart matrix-synapse.service;
+        '';
+        email = "rian.lindenberger@gmail.com";
       };
     };
   };
