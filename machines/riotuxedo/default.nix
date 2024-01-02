@@ -113,7 +113,7 @@
     };
     desktop.enable = true;
     syncthing.enable = true;
-    anbox.enable = true;
+    waydroid.enable = true;
   };
   programs = {
     fish.enable = true;
