@@ -1,12 +1,6 @@
 # from https://nixos.wiki/wiki/Wireguard
 { config, pkgs, ... }:
 {
-  # enable NAT
-  boot.kernel.sysctl = {
-    "net.ipv4.conf.all.forwarding" = 1;
-    "net.ipv4.conf.default.forwarding" = 1;
-    "net.ipv4.conf.eth0.route_localnet" = 1;
-  };
   networking = {
     nat = {
       enable = true;
