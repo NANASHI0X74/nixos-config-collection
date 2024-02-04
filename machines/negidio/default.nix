@@ -15,7 +15,6 @@
     ../../profiles/ssh-decrypt.nix
     ../../profiles/openssh-config.nix
     ../../profiles/gitlab.nix
-    ../../profiles/weston-rdp/nginx.nix
     ../../resources/script/postgres_update.nix
   ];
 

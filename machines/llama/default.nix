@@ -4,7 +4,6 @@
     ../../profiles/defaults-servers.nix
     ../../profiles/openssh-config.nix
     ../../profiles/wireguard/wg-server.nix
-    ../../profiles/weston-rdp/portforwards.nix
   ];
 
   time.timeZone = "Europe/Berlin";
