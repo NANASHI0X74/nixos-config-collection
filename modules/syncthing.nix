@@ -6,7 +6,6 @@ let
   cfg = config.modules.syncthing;
 in
 {
-  environment.systemPackages = [ pkgs.syncthing ];
   options.modules.syncthing = {
     enable = mkBoolOpt false;
   };
