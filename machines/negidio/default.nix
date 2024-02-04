@@ -112,4 +112,5 @@
     };
   };
   modules.waydroid.enable = true;
+  nixpkgs.config.allowUnfree = true;
 }
