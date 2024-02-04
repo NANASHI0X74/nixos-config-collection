@@ -15,11 +15,15 @@
     ../../profiles/ssh-decrypt.nix
     ../../profiles/openssh-config.nix
     ../../profiles/gitlab.nix
+    ../../profiles/weston-rdp/nginx.nix
     ../../resources/script/postgres_update.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
   boot.loader.grub.device = "nodev"; # or "nodev" for efi only
   boot.initrd = {
     luks.devices = {
