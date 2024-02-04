@@ -111,4 +111,5 @@
       };
     };
   };
+  modules.waydroid.enable = true;
 }
