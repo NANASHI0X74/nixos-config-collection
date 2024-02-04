@@ -64,7 +64,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  environment.systemPackages = with pkgs; [ neovim git tmux pciutils ];
+  environment.systemPackages = with pkgs; [ neovim git tmux pciutils waypipe ];
 
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [
