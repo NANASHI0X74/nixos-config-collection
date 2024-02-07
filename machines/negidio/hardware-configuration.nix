@@ -9,29 +9,30 @@
       ("${modulesPath}/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" "r8169" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-
-
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-  boot.initrd = {
-    luks.devices = {
-      "m2crypt" = {
-        device = "/dev/disk/by-uuid/ceb75a70-c7d8-44a5-b91f-9cdd75d415e7";
-        preLVM = true;
-        allowDiscards = true;
-      };
-      "satacrypt" = {
-        device = "/dev/disk/by-uuid/d089dd88-be21-45ea-a1e9-21958368359a";
-        preLVM = true;
-        allowDiscards = true;
-      };
-      "cryptsata2" = {
-        device = "/dev/disk/by-uuid/45f0e79b-bbfc-4a7d-9686-b1604f792b10";
-        preLVM = true;
-        allowDiscards = true;
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" "r8169" ];
+    initrd.kernelModules = [ "dm-snapshot" ];
+    kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "net.ipv4.tcp_mtu_probing=1" ];
+    extraModulePackages = [ ];
+    loader.grub.device = "nodev"; # or "nodev" for efi only
+    initrd = {
+      luks.devices = {
+        "m2crypt" = {
+          device = "/dev/disk/by-uuid/ceb75a70-c7d8-44a5-b91f-9cdd75d415e7";
+          preLVM = true;
+          allowDiscards = true;
+        };
+        "satacrypt" = {
+          device = "/dev/disk/by-uuid/d089dd88-be21-45ea-a1e9-21958368359a";
+          preLVM = true;
+          allowDiscards = true;
+        };
+        "cryptsata2" = {
+          device = "/dev/disk/by-uuid/45f0e79b-bbfc-4a7d-9686-b1604f792b10";
+          preLVM = true;
+          allowDiscards = true;
+        };
       };
     };
   };
@@ -59,7 +60,7 @@
     driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
