@@ -43,7 +43,7 @@
   };
   time.timeZone = "Europe/Berlin";
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" ];
+    builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" "beeper" ];
   environment = {
     systemPackages = with pkgs; [
       wl-clipboard
@@ -71,6 +71,7 @@
       akonadi
       inputs.devenv.packages.x86_64-linux.devenv
       # kdav
+      beeper
 
       xclip
       python3
