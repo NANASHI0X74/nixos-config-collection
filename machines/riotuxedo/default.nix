@@ -139,9 +139,6 @@
     spiceUSBRedirection.enable = true;
   };
 
-  security = {
-    rtkit.enable = true;
-  };
   services = {
     udev.packages = [
       pkgs.qmk-udev-rules
