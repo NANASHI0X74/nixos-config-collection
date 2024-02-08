@@ -22,7 +22,7 @@ in
     user.packages = with pkgs; [
       ## Emacs itself
       binutils # native-comp needs 'as', provided by this
-      ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [
+      ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs: [
         epkgs.vterm
         epkgs.pdf-tools
         epkgs.phpactor
@@ -72,7 +72,7 @@ in
 
     # modules.shell.zsh.rcFiles = [ "${configDir}/emacs/aliases.zsh" ];
 
-    fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+    fonts.packages = [ pkgs.emacs-all-the-icons-fonts ];
 
     # init.doomEmacs = mkIf cfg.doom.enable ''
     #   if [ -d $HOME/.config/emacs ]; then
