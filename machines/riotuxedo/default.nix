@@ -68,9 +68,10 @@
       networkmanagerapplet
       inputs.devenv.packages.x86_64-linux.devenv
       libreoffice
-      # kdav
       beeper
       AusweisApp2
+      logseq
+
 
       xclip
       python3
@@ -89,7 +90,6 @@
       unzip
       rnix-lsp
       cachix
-      # plasma-browser-integration
 
       # browsers
       firefox-wayland
