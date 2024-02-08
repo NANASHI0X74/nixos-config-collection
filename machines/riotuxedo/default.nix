@@ -151,7 +151,7 @@
     kbfs.enable = true;
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint ];
+      drivers = with pkgs;[ gutenprint epson-escpr ];
     };
   };
   users = {
