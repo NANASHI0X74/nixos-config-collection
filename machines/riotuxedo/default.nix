@@ -66,12 +66,11 @@
       wget
       neovim
       networkmanagerapplet
-      kontact
-      korganizer
-      akonadi
       inputs.devenv.packages.x86_64-linux.devenv
+      libreoffice
       # kdav
       beeper
+      AusweisApp2
 
       xclip
       python3
