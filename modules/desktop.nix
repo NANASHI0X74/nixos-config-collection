@@ -55,6 +55,11 @@ in
       pam.services.login.enableKwallet = true;
       rtkit.enable = true;
     };
+    services.avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
 
   };
 }
