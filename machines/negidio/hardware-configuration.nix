@@ -53,4 +53,10 @@
 
   nix.settings.max-jobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32bit = true;
+  };
 }
