@@ -43,7 +43,7 @@
   };
   time.timeZone = "Europe/Berlin";
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" ];
+    builtins.elem (lib.getName pkg) [ "slack" "steam" "steam-run" "steam-original" "beeper" ];
   environment = {
     systemPackages = with pkgs; [
       wl-clipboard
@@ -66,11 +66,12 @@
       wget
       neovim
       networkmanagerapplet
-      kontact
-      korganizer
-      akonadi
       inputs.devenv.packages.x86_64-linux.devenv
-      # kdav
+      libreoffice
+      beeper
+      AusweisApp2
+      logseq
+
 
       xclip
       python3
@@ -89,7 +90,6 @@
       unzip
       rnix-lsp
       cachix
-      # plasma-browser-integration
 
       # browsers
       firefox-wayland
@@ -138,9 +138,6 @@
     spiceUSBRedirection.enable = true;
   };
 
-  security = {
-    rtkit.enable = true;
-  };
   services = {
     udev.packages = [
       pkgs.qmk-udev-rules
@@ -150,7 +147,7 @@
     kbfs.enable = true;
     printing = {
       enable = true;
-      drivers = [ pkgs.gutenprint ];
+      drivers = with pkgs;[ gutenprint epson-escpr ];
     };
   };
   users = {

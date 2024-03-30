@@ -20,6 +20,7 @@ in
       gnome.gnome-keyring.enable = lib.mkForce false;
       udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
       pipewire = {
+        audio.enable = true;
         enable = true;
         alsa = {
           enable = true;
@@ -44,9 +45,21 @@ in
     };
 
     # following are needed because of conflicting configs in different enabled desktop envs
-    hardware.pulseaudio.enable = false; # pipewire is used instead, needed because gnome enables it by default
+    hardware.pulseaudio = {
+      enable = false; # pipewire is used instead, needed because gnome enables it by default
+      zeroconf.discovery.enable = true;
+    };
     programs.ssh.askPassword = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
 
-    security.pam.services.login.enableKwallet = true;
+    security = {
+      pam.services.login.enableKwallet = true;
+      rtkit.enable = true;
+    };
+    services.avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
+
   };
 }

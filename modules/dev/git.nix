@@ -14,6 +14,7 @@ in
         enable = true;
         aliases = {
           co = "checkout";
+          sync = "!\"git pull --rebase && git push\"";
         };
         userName = "nanashi0x74";
         userEmail = "rian.lindenberger@gmail.com";
