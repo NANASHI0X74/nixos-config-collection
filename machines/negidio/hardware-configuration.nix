@@ -13,7 +13,9 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" "r8169" ];
     initrd.kernelModules = [ "dm-snapshot" ];
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "net.ipv4.tcp_mtu_probing=1" ];
+    kernel.sysctl = {
+      "net.ipv4.tcp_mtu_probing" = 1;
+    };
     extraModulePackages = [ ];
     loader.grub.device = "nodev"; # or "nodev" for efi only
     initrd = {
