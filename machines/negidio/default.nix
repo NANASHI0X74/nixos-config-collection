@@ -111,5 +111,5 @@
       };
     };
   };
-  modules.waydroid.enable = true;
+  modules.remote-waydroid.enable = true;
 }
