@@ -15,6 +15,7 @@
     ../../profiles/ssh-decrypt.nix
     ../../profiles/openssh-config.nix
     ../../profiles/gitlab.nix
+    ../../profiles/remote-waydroid.nix
     ../../resources/script/postgres_update.nix
   ];
 
@@ -111,5 +112,4 @@
       };
     };
   };
-  modules.remote-waydroid.enable = true;
 }
